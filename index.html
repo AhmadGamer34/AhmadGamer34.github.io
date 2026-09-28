@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Instantly redirects the browser to Telegram -->
-    <meta http-equiv="refresh" content="0; url=https://t.me/sonyComputer1">
     <title>Redirecting...</title>
+    <script>
+        // Base Telegram channel URL
+        const baseTelegramUrl = "https://t.me/sonyComputer1";
+
+        // Read parameters from the current URL (e.g., ?msg=123)
+        const urlParams = new URLSearchParams(window.location.search);
+        const msgId = urlParams.get('msg');
+
+        // Construct the final destination URL
+        // If a message ID is provided, append it (e.g., base/123), otherwise go to main channel
+        const finalUrl = msgId ? `${baseTelegramUrl}/${msgId}` : baseTelegramUrl;
+
+        // Execute the instant redirect
+        window.location.replace(finalUrl);
+    </script>
 </head>
 <body>
-    <p>If you are not redirected automatically, <a href="https://t.me/sonyComputer1">click here</a>.</p>
+    <p>Redirecting to our product channel... If it doesn't load, <a id="fallback" href="https://t.me/sonyComputer1">click here</a>.</p>
+    <script>
+        // Update the manual fallback link just in case JavaScript takes a millisecond to process
+        document.getElementById('fallback').href = finalUrl;
+    </script>
 </body>
 </html>
